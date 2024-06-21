@@ -1,0 +1,24 @@
+body{
+    display: flex;
+}
+.inputsLogin{
+    display: flex;
+    flex-direction: column;
+    
+}
+.inputUsuario{
+    margin-bottom: 10%;
+    border-radius: 3px;
+}
+.inputSenha{
+    margin-bottom: 10%;
+    border-radius: 3px;
+
+}
+.tituloLogin{
+    margin-left: 38%;
+    display: flex;
+    margin-bottom: 3%;
+    font-size: xx-large;
+    
+}

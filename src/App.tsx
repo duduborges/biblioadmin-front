@@ -1,22 +1,26 @@
-import { Button, Navbar } from 'flowbite-react'
-import './App.css'
+import { createBrowserRouter } from "react-router-dom"
+import Home from "./pages/home"
+import { Signin } from "./pages/signin"
+import Login from "./pages/login"
 
-function App() {
 
-  return (
-    <>
-    <div>
-      <h1 className='color-red'>SISTEMA BIBLIOTECA</h1>
-      <a className='tituloLogin'>Login</a>
-      <a>Usuário</a>
-      <div className='inputsLogin'>
-        <input type="text" className='inputUsuario'/>
-        <a>Senha</a>
-        <input type="text" className='inputSenha'/>
-      </div>
-    </div>
-    </>
-  )
-}
 
-export default App
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+  },
+  {
+    path:'/signin',
+    element: <Signin/>
+  },
+  {
+    path:'/login',
+    element: <Login/>
+  }
+  
+
+])
+
+export { router }

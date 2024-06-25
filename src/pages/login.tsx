@@ -1,28 +1,64 @@
-import { Button, Label, TextInput } from "flowbite-react";
+import React, { useState} from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
+const logar = async (matricula: string, password:string) => {
+  try {
+    const response = await axios.post('http://localhost:8010/biblio/estudante/login', {
+      matricula: matricula,
+      password: password,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+function Login() {
+  const navigate = useNavigate()
+  const [matricula, setMatricula] = useState('');
+  const [password, setPassword] = useState('');
 
-export default function Login() {
+  const handleLogin = async () => {
+    try {
+      const response = await logar(matricula, password);
+      if(response == true){
+        navigate('/')
+      }
+      else{
+        alert("Matrícula ou senha incorretas")
+      }
+      } catch (error) {
+        console.error('Erro ao se logar:', error);
+      }
+  };
+  
   return (
-    <form className="flex max-w-md flex-col gap-4 ml-10 mt-10">
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="email2" value="Your email" />
-        </div>
-        <TextInput id="email2" type="email" placeholder="name@flowbite.com" required shadow />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="password2" value="Your password" />
-        </div>
-        <TextInput id="password2" type="password" required shadow />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="repeat-password" value="Repeat password" />
-        </div>
-        <TextInput id="repeat-password" type="password" required shadow />
-      </div>
-      <Button type="submit">Register new account</Button>
-    </form>
-  )
+    <div className='body'>
+      <h1 className=''>Login Estudante</h1>
+      <form>
+        <label>
+          Matrícula:
+          <input
+            type="number"
+            value={matricula}
+            onChange={(e) => setMatricula(e.target.value)}
+          />
+        </label>
+        <label>
+          Senha:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button type="button" onClick={handleLogin}>
+          Logar
+        </button>
+      </form>
+    </div>
+  );
+
 }
+
+export default Login;

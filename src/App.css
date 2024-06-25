@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+
+.body{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    font-family: "Tiny5", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+h1{
+    margin-bottom: 3%;
+    font-size: 2svi;
+    font-family: fantasy;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}

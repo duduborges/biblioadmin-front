@@ -1,4 +1,5 @@
-export default function CadastroLivro() {
+export default function Livro() {
+
     return (
         <>
         </>

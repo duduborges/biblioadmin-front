@@ -1,9 +1,9 @@
 import { Button, Label, TextInput } from "flowbite-react";
 
 
-export default function Login(){
-    return(
-        <form className="flex max-w-md flex-col gap-4">
+export default function Login() {
+  return (
+    <form className="flex max-w-md flex-col gap-4 ml-10 mt-10">
       <div>
         <div className="mb-2 block">
           <Label htmlFor="email2" value="Your email" />
@@ -24,5 +24,5 @@ export default function Login(){
       </div>
       <Button type="submit">Register new account</Button>
     </form>
-    )
+  )
 }

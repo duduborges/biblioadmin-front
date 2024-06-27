@@ -92,7 +92,6 @@ function Signin() {
           </div>
           <TextInput id="password2" type="password" ref={reptpasswordRef} required shadow />
         </div>
-        
        
         <Button type="submit">Register new account</Button>
       </form>

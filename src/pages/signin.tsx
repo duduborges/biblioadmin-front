@@ -13,14 +13,14 @@ interface UserProps{
 
 
 function Signin() {
-  const [, setUsers] = useState<UserProps[]>([])
+  const [users, setUsers] = useState<UserProps[]>([])
   const nomeRef = useRef<HTMLInputElement | null>(null)
   const matriculaRef = useRef<HTMLInputElement | null>(null)
   const passwordRef = useRef<HTMLInputElement | null>(null)
   const emailRef = useRef<HTMLInputElement | null>(null)
   const reptpasswordRef = useRef<HTMLInputElement | null>(null)
   const telefoneRef = useRef<HTMLInputElement | null>(null)
-
+  const navigate = useNavigate()
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
@@ -42,12 +42,12 @@ function Signin() {
             matricula: matriculaRef.current?.value,
             telefone: telefoneRef.current?.value,
         })
-
-        const { user } = response.data;
-
-
-        setUsers(allUsers => [...allUsers, user])
-
+        alert("usuario criado com sucesso!")
+         
+        let nome = response.data.nome
+        localStorage.setItem("nomeuser", nome)
+        
+        navigate("/")
     } catch (error) {
         alert("Ocorreu um erro ao criar o usuário")
     }
@@ -56,7 +56,7 @@ function Signin() {
   return (
     <>
       <div className='varela-round-regular h-[100vh] flex justify-center items-center ' >
-      <form className=' border-2 border-black p-8 rounded-xl'>
+      <form  className=' border-2 border-black p-8 rounded-xl'>
       <h1 className='text-center mb-10 '>Cadastro Estudante</h1>
       <div className="flex flex-row">
 
@@ -66,6 +66,8 @@ function Signin() {
             Nome
           </label>
           <input
+          ref={nomeRef}
+          
           className='bg-gray-300 border-none rounded-lg border mb-8'
             type="text"
           />
@@ -74,6 +76,7 @@ function Signin() {
           <label className='inputSenha'>
             Matricula</label>
             <input
+            ref={matriculaRef}
             className='bg-gray-300 border-none rounded-xl border mb-8'
             type="number"
           />
@@ -82,6 +85,7 @@ function Signin() {
           <label className='inputSenha'>
             E-mail</label>
             <input
+             ref={emailRef}
             className='bg-gray-300 border-none rounded-xl border mb-4'
             type="text"
           />
@@ -93,31 +97,34 @@ function Signin() {
           <label className='inputSenha'>
             Telefone</label>
             <input
+             ref={telefoneRef}
             className='bg-gray-300 border-none rounded-xl border mb-8'
-            type="number"
+            type="text"
           />
         </div>
         <div className='flex flex-col'>
           <label className='inputSenha'>
             Senha</label>
             <input
+             ref={passwordRef}
             className='bg-gray-300 border-none rounded-xl border mb-8'
-            type="number"
+            type="password"
           />
         </div>
         <div className='flex flex-col'>
           <label className='inputSenha'>
             Repetir senha</label>
             <input
+             ref={reptpasswordRef}
             className='bg-gray-300 border-none rounded-xl border'
-            type="number"
+            type="password"
           />
         </div>
         </div>
       </div>
 
         <div className='flex  justify-center mt-8'>
-        <button className='botaoLogar p-2 border-none rounded-xl border' type="button" >
+        <button onClick={handleSubmit} className='botaoLogar p-2 border-none rounded-xl border' type="button" >
           Cadastrar
         </button>
         </div>

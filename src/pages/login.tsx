@@ -50,7 +50,7 @@ function Login() {
         <div className='flex flex-col'>
           <label className='inputSenha'>
             Senha</label>
-          <input
+            <input
             className='bg-gray-300 border-none rounded-xl border'
             type="password"
             value={password}
@@ -58,13 +58,13 @@ function Login() {
           />
         </div>
         <div className='flex  justify-center mt-8'>
-        <button className='botaoLogar' type="button" onClick={handleLogin} >
+        <button className='botaoLogar border-none rounded-xl border p-2' type="button" onClick={handleLogin} >
           Logar
         </button>
         </div>
         <p className='mt-5'>
           Não possui cadastro?
-          <a href='/signin' className='underline'>Te cadastra ai nego</a>
+          <a href='/signin' className='underline'>Cadastrar-se</a>
         </p>
       </form>
     </div>

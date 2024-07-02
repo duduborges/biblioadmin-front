@@ -54,48 +54,80 @@ function Signin() {
 }
 
   return (
-    <main className="flex justify-center ite " >
-      <form onSubmit={handleSubmit} className="flex">
-      <div>
-          <div className="mb-2 block ">
-            <Label  value="Seu nome" />
-          </div>
-          <TextInput id="email2" type="text" ref={nomeRef} placeholder="name@flowbite.com" required shadow />
+    <>
+      <div className='varela-round-regular h-[100vh] flex justify-center items-center ' >
+      <form className=' border-2 border-black p-8 rounded-xl'>
+      <h1 className='text-center mb-10 '>Cadastro Estudante</h1>
+      <div className="flex flex-row">
+
+      <div >
+        <div className='flex flex-col'>
+          <label className='inputMatricula'>
+            Nome
+          </label>
+          <input
+          className='bg-gray-300 border-none rounded-lg border mb-8'
+            type="text"
+          />
         </div>
-        <div>
-          <div className="mb-2 block ">
-            <Label  value="Seu email" />
-          </div>
-          <TextInput id="email2" type="email" ref={emailRef} placeholder="name@flowbite.com" required shadow />
+        <div className='flex flex-col'>
+          <label className='inputSenha'>
+            Matricula</label>
+            <input
+            className='bg-gray-300 border-none rounded-xl border mb-8'
+            type="number"
+          />
         </div>
-        <div>
-          <div className="mb-2 block">
-            <Label  value="Sua matricula" />
-          </div>
-          <TextInput id="email2" type="text" ref={matriculaRef} placeholder="name@flowbite.com" required shadow />
+        <div className='flex flex-col'>
+          <label className='inputSenha'>
+            E-mail</label>
+            <input
+            className='bg-gray-300 border-none rounded-xl border mb-4'
+            type="text"
+          />
         </div>
-        <div>
-          <div className="mb-2 block">
-            <Label  value="Seu telefone" />
-          </div>
-          <TextInput id="email2" type="text" ref={telefoneRef} placeholder="name@flowbite.com" required shadow />
         </div>
-        <div>
-          <div className="mb-2 block">
-            <Label  value="Sua senha" />
-          </div>
-          <TextInput id="password2" type="password" ref={passwordRef} required shadow />
+
+        <div className="pl-12">
+        <div className='flex flex-col'>
+          <label className='inputSenha'>
+            Telefone</label>
+            <input
+            className='bg-gray-300 border-none rounded-xl border mb-8'
+            type="number"
+          />
         </div>
-        <div>
-          <div className="mb-2 block">
-            <Label  value="Reescreva sua senha" />
-          </div>
-          <TextInput id="password2" type="password" ref={reptpasswordRef} required shadow />
+        <div className='flex flex-col'>
+          <label className='inputSenha'>
+            Senha</label>
+            <input
+            className='bg-gray-300 border-none rounded-xl border mb-8'
+            type="number"
+          />
         </div>
-       
-        <Button type="submit">Register new account</Button>
+        <div className='flex flex-col'>
+          <label className='inputSenha'>
+            Repetir senha</label>
+            <input
+            className='bg-gray-300 border-none rounded-xl border'
+            type="number"
+          />
+        </div>
+        </div>
+      </div>
+
+        <div className='flex  justify-center mt-8'>
+        <button className='botaoLogar p-2 border-none rounded-xl border' type="button" >
+          Cadastrar
+        </button>
+        </div>
+        <p className='mt-5 flex  justify-center'>
+          Já possui uma conta?
+          <a href='/login' className='ml-2 underline'> Faça login</a>
+        </p>
       </form>
-    </main>
+    </div>
+    </>
   )
 }
 export { Signin }

@@ -27,9 +27,9 @@ export default function Nav(){
         </Navbar.Brand>
         <Navbar.Toggle />
         <div className="flex md:order-2">
-          <span className="mx-4 self-center whitespace-nowrap text-sm font-semibold dark:text-white">Bem vindo {nome}</span>
-          {logado ? (
+        {logado ? (
             <>
+              <span className="mx-4 self-center whitespace-nowrap text-sm font-semibold dark:text-white">Bem vindo {nome}</span>
               <button className="py-2 px-5 font- rounded-lg text-white font-bold bg-red-600 hover:bg-red-400" onClick={deletar} >Sair</button>
             </>
             ) : (

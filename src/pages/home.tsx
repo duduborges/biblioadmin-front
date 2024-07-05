@@ -2,12 +2,12 @@ import { useState } from "react";
 import Nav from "../components/navbar";
 
 export default function Home() {
-    const [isblibliotecario, setIsblibliotecario] = useState(false)
-    
+    const [isBlibliotecario, setIsBlibliotecario] = useState(false)
+
     return (
         <>
         <Nav />
-        {isblibliotecario? (
+        {isBlibliotecario? (
             <>
             penis
             </>

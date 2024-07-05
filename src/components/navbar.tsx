@@ -40,9 +40,9 @@ export default function Nav(){
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>
-          <Navbar.Link href="#">Emprestimos</Navbar.Link>
-          <Navbar.Link href="#">Alunos</Navbar.Link>
-          <Navbar.Link href="#">Livros</Navbar.Link>
+          <Navbar.Link href="/emprestimo">Emprestimos</Navbar.Link>
+          <Navbar.Link href="/alunos">Alunos</Navbar.Link>
+          <Navbar.Link href="/livro">Livros</Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
     )

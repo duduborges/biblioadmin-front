@@ -32,7 +32,7 @@ export default function Livro() {
       <div className="w-11/12 m-auto pt-3 ">
 
         <Table className="" >
-          <Table.Head className="bg-red-500">
+          <Table.Head className="bg-cyan-200">
             <Table.HeadCell>Título</Table.HeadCell>
             <Table.HeadCell>Autor</Table.HeadCell>
             <Table.HeadCell>Editora</Table.HeadCell>
@@ -43,7 +43,7 @@ export default function Livro() {
           </Table.Head>
           <Table.Body className="divide-y">
             {livro.map((livros, index) => (
-              <Table.Row key={index} className="bg-red-500 dark:border-gray-700 dark:bg-gray-800">
+              <Table.Row key={index} className="bg-cyan-200 dark:border-gray-700 dark:bg-gray-800">
 
                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {livros.titulo}
@@ -51,11 +51,7 @@ export default function Livro() {
                 <Table.Cell>{livros.autor}</Table.Cell>
                 <Table.Cell>{livros.editora}</Table.Cell>
                 <Table.Cell>{livros.ano}</Table.Cell>
-                <Table.Cell>
-                  <a href="" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                    Edit
-                  </a>
-                </Table.Cell>
+                
               </Table.Row>
             ))}
           </Table.Body>

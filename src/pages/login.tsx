@@ -13,6 +13,7 @@ function Login() {
     .then(function (response) {
       let nome = response.data.nome
       localStorage.setItem("nomeuser", nome)
+      localStorage.setItem("idUser", response.data.idEstudante)
       localStorage.setItem("isBiblio", response.data.isBiblio)
       navigate('/')
   })

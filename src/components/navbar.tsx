@@ -3,11 +3,18 @@ import { Button, Navbar } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 export default function Nav(){
-  const [isblibliotecario, setIsblibliotecario] = useState(true)
+  const [isblibliotecario, setIsblibliotecario] = useState(false)
   const [logado, setLogado] = useState(true)
+  const biblio = localStorage.getItem("isBiblio")
   let nome = localStorage.getItem("nomeuser")
   const navigate = useNavigate()
+
   useEffect(() => {
+    if(biblio == "true"){
+      setIsblibliotecario(true)
+     }else{
+      setIsblibliotecario(false)
+     }
     if(localStorage.getItem("nomeuser") == null){
       setLogado(false)
     }else{
@@ -45,9 +52,10 @@ export default function Nav(){
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link href="#">Emprestimos</Navbar.Link>
-        <Navbar.Link href="#">Alunos</Navbar.Link>
-        <Navbar.Link href="#">Livros</Navbar.Link>
+        <Navbar.Link href="/gerenciarEmprestimo">Emprestimos</Navbar.Link>
+        <Navbar.Link href="/aluno">Alunos</Navbar.Link>
+        <Navbar.Link href="/livro">Livros</Navbar.Link>
+        <Navbar.Link href="/cadastroLivro">Cadastrar Livros</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
           </>
@@ -72,8 +80,8 @@ export default function Nav(){
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link href="#">Emprestimos</Navbar.Link>
-        <Navbar.Link href="#">Livros</Navbar.Link>
+      <Navbar.Link href="/gerenciarEmprestimo">Emprestimo</Navbar.Link>
+        <Navbar.Link href="/livro">Livros</Navbar.Link>
       </Navbar.Collapse>
    
    </Navbar>

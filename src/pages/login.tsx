@@ -2,17 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const logar = async (matricula: string, password: string) => {
-  try {
-    const response = await axios.post('http://localhost:8010/biblio/estudante/login', {
-      matricula: matricula,
-      password: password,
-    });
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+
 function Login() {
   const navigate = useNavigate()
   const [matricula, setMatricula] = useState('');
@@ -23,6 +13,7 @@ function Login() {
     .then(function (response) {
       let nome = response.data.nome
       localStorage.setItem("nomeuser", nome)
+      localStorage.setItem("isBiblio", response.data.isBiblio)
       navigate('/')
   })
   .catch(function (error) {

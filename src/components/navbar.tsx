@@ -39,6 +39,7 @@ export default function Nav(){
           </>
           ) : (
             <>
+<<<<<<< HEAD
             <button className="py-2 px-5 font- rounded-lg hover:text-white font-bold hover:scale-110 hover:transition-all bg-green-400 text-black" onClick={() => navigate("/login")} >Login</button>
           </>
         )}
@@ -79,5 +80,23 @@ export default function Nav(){
           </>
       ) }
       </>
+=======
+              <span className="mx-4 self-center whitespace-nowrap text-sm font-semibold dark:text-white">Bem vindo {nome}</span>
+              <button className="py-2 px-5 font- rounded-lg text-white font-bold bg-red-600 hover:bg-red-400" onClick={deletar} >Sair</button>
+            </>
+            ) : (
+              <>
+              <button className="py-2 px-5 font- rounded-lg hover:text-white font-bold hover:scale-110 hover:transition-all bg-green-400 text-black" onClick={() => navigate("/login")} >Login</button>
+            </>
+          )}
+          <Navbar.Toggle />
+        </div>
+        <Navbar.Collapse>
+          <Navbar.Link href="/emprestimo">Emprestimos</Navbar.Link>
+          <Navbar.Link href="/alunos">Alunos</Navbar.Link>
+          <Navbar.Link href="/livro">Livros</Navbar.Link>
+        </Navbar.Collapse>
+      </Navbar>
+>>>>>>> 9153ae32c3671320b3f46e7634325d6a6ecfa85b
     )
 }

@@ -106,32 +106,32 @@ export default function CadastroLivro() {
             <Nav />
             <div className="w-11/12 m-auto py-3 ">
                 <div className="w-full justify-end flex ">
-                    <Button onClick={() => setOpenModal(true)} className="bg-green-500 text-white shadow-xl rounded-t-xl rounded-b-none ">Adicionar livro</Button>
+                    <button onClick={() => setOpenModal(true)} className="py-2 px-5  rounded-t-lg text-white font-bold bg-blue-400 hover:bg-blue-600">Adicionar livro</button>
                 </div>
                 <Table className="" >
-                    <Table.Head className="bg-cyan-200">
+                    <Table.Head className="bg-cyan-200 text-lg">
                         <Table.HeadCell>Título</Table.HeadCell>
                         <Table.HeadCell>Autor</Table.HeadCell>
                         <Table.HeadCell>Editora</Table.HeadCell>
-                        <Table.HeadCell>Ano</Table.HeadCell>
-                        <Table.HeadCell>
-                            <span className="">Edit</span>
+                        <Table.HeadCell >Ano</Table.HeadCell>
+                        <Table.HeadCell className="text-center">
+                            <span className="">gerenciar</span>
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {livro.map((livros) => (
-                            <Table.Row key={livros.idLivro} className="bg-green-500 text-green-200 dark:border-gray-700 dark:bg-gray-800">
+                            <Table.Row key={livros.idLivro} className="bg-blue-400 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
                                 <Table.Cell className="whitespace-nowrap font-bold text-white dark:text-white">
                                     {livros.titulo}
                                 </Table.Cell>
                                 <Table.Cell>{livros.autor}</Table.Cell>
                                 <Table.Cell>{livros.editora}</Table.Cell>
                                 <Table.Cell>{livros.ano}</Table.Cell>
-                                <Table.Cell className="flex gap-4 justify-start">
-                                    <button onClick={() => handleUpdate(livros)} className="text-xl text-yellow-300 font-bold hover:underline dark:text-cyan-500">
+                                <Table.Cell className="flex gap-4 justify-center">
+                                    <button onClick={() => handleUpdate(livros)} className="text-xl text-white font-bold hover:underline dark:text-cyan-500">
                                         <ImPencil />
                                     </button>
-                                    <button onClick={() => handleDelete(livros.idLivro)} className="text-2xl text-red-500 font-bold hover:underline dark:text-cyan-500">
+                                    <button onClick={() => handleDelete(livros.idLivro)} className="text-2xl text-gray font-bold hover:underline dark:text-cyan-500">
                                         <IoTrashSharp />
                                     </button>
                                 </Table.Cell>
@@ -139,7 +139,7 @@ export default function CadastroLivro() {
                         ))}
                     </Table.Body>
                 </Table>
-            </div>
+            </div >
             {(!isDeleted ? (
                 <>
                     <Toast className="absolute z-10 toasti">
@@ -150,18 +150,21 @@ export default function CadastroLivro() {
                         <Toast.Toggle onDismiss={() => setIsDeleted(true)} />
                     </Toast>
                 </>
-            ) : null)}
-            {(!isUpdated ? (
-                <>
-                    <Toast className="absolute z-10 toasti">
-                        <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
-                            <HiCheck className="h-5 w-5" />
-                        </div>
-                        <div className="ml-3 text-sm font-normal">{add ? "Livro adicionado com sucesso!" : "Livro atualizado com sucesso"}</div>
-                        <Toast.Toggle onDismiss={() => setIsUpdated(true)} />
-                    </Toast>
-                </>
-            ) : null)}
+            ) : null)
+            }
+            {
+                (!isUpdated ? (
+                    <>
+                        <Toast className="absolute z-10 toasti">
+                            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-center dark:bg-green-800 dark:text-green-200">
+                                <HiCheck className="h-5 w-5" />
+                            </div>
+                            <div className="ml-3 text-sm font-normal">{add ? "Livro adicionado com sucesso!" : "Livro atualizado com sucesso"}</div>
+                            <Toast.Toggle onDismiss={() => setIsUpdated(true)} />
+                        </Toast>
+                    </>
+                ) : null)
+            }
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <Modal.Header />
                 <Modal.Body>
@@ -217,7 +220,7 @@ export default function CadastroLivro() {
                                 />
                             </div>
                             <div className="w-full">
-                                <Button className="bg-green-500" type="submit">
+                                <Button className="bg-cyan600" type="submit">
                                     {add ? 'Adicionar livro' : 'Atualizar livro'}
                                 </Button>
                             </div>

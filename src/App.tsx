@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom"
 import Home from "./pages/home"
 import { Signin } from "./pages/signin"
 import Login from "./pages/login"
-import Livro from "./pages/livro/livro"
 import CadastroLivro from "./pages/livro/cadastroLivro"
 import GerenciarEmprestimo from "./pages/gerenciarEmprestimo"
 import { Alunos } from "./pages/aluno/gerenciarAluno"
@@ -15,27 +14,27 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path:'/signin',
-    element: <Signin/>
+    path: '/signin',
+    element: <Signin />
   },
   {
-    path:'/login',
-    element: <Login/>
+    path: '/login',
+    element: <Login />
   },
   {
-    path:'/gerenciarEmprestimo',
-    element: <GerenciarEmprestimo/>
+    path: '/gerenciarEmprestimo',
+    element: <GerenciarEmprestimo />
   },
   {
-    path:'/cadastroLivro',
-    element: <CadastroLivro/>
+    path: '/cadastroLivro',
+    element: <CadastroLivro />
   },
   {
-    path:'/livro',
-    element: <Livro/>
+    path: '/livro',
+    element: <CadastroLivro />
   }, {
-    path:'/aluno',
-    element: <Alunos/>
+    path: '/aluno',
+    element: <Alunos />
   }
 ])
 

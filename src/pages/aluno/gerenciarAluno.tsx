@@ -5,10 +5,10 @@ import Nav from "../../components/navbar";
 import { Modal } from "flowbite-react";
 
 interface AlunoProps {
-    IdEstudante: number, 
+    IdEstudante: number,
     matricula: number,
     email: string,
-    nome: string, 
+    nome: string,
     telefone: string
 }
 
@@ -20,7 +20,7 @@ function Alunos() {
     const [isDeleted, setIsDeleted] = useState(true);
     const [isUpdated, setIsUpdated] = useState(true);
 
-    const[novoAluno, setNovoAluno] = useState({
+    const [novoAluno, setNovoAluno] = useState({
         idEstudante: 0,
         matricula: 0,
         email: '',
@@ -41,21 +41,21 @@ function Alunos() {
     }
 
 
-    const handleInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
-        const{ name, value } = event.target;
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
         setNovoAluno((prevAluno) => ({
             ...prevAluno,
             [name]: value,
         }))
     }
 
-    const handleSubmit = async (event : React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             if (add) {
-                await axios.post('http://localhost:8010/biblio/livro', novoAluno);
+                await axios.post('http://189.8.205.53:8010/biblio/livro', novoAluno);
             } else {
-                await axios.put("http://localhost:8010/biblio/livro", novoAluno,);
+                await axios.put("http://189.8.205.53:8010/biblio/livro", novoAluno,);
             }
             fetchAlunos();
             onCloseModal();
@@ -66,9 +66,9 @@ function Alunos() {
 
     }
 
-    const handleDelete = async (id : number) => {
+    const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`http://localhost:8010/biblio/estudante/id/${id}`);
+            await axios.delete(`http://189.8.205.53:8010/biblio/estudante/id/${id}`);
             fetchAlunos();
             setIsDeleted(false)
         } catch (error) {
@@ -86,12 +86,12 @@ function Alunos() {
             nome: estudante.nome,
             telefone: estudante.telefone
         })
-        }
-    
+    }
+
 
     const fetchAlunos = async () => {
         try {
-            const response = await axios.get(`http://localhost:8010/biblio/estudante`);
+            const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante`);
             setAluno(response.data);
             console.log(response.data)
         } catch (error) {
@@ -102,11 +102,11 @@ function Alunos() {
     useEffect(() => {
         fetchAlunos();
     }, []);
-     
+
 
     return (
         <>
-        <Nav/>
+            <Nav />
             <div className="w-11/12 m-auto pt-3 ">
                 <Table className="" >
                     <Table.Head className="bg-cyan-200">

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { Button, Navbar } from "flowbite-react";
 
@@ -6,23 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { funcao } from "../functio";
 
 export default function Home() {
-  const [isblibliotecario, setIsblibliotecario] = useState(false)
   const [logado, setLogado] = useState(true)
-  let nome = localStorage.getItem("nomeuser")
   const navigate = useNavigate()
-  useEffect(() => {
-    if (localStorage.getItem("nomeuser") == null) {
-      setLogado(false)
-    } else {
-      setLogado(true)
-    }
-  });
 
-  funcao
-  function deletar() {
-    localStorage.removeItem("nomeuser");
-    navigate("/")
-  }
+
+  funcao()
+
 
   return (
     <>

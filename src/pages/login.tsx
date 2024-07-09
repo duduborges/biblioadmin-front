@@ -9,32 +9,32 @@ function Login() {
   const [senha, setSenha] = useState('');
 
   const handleLogin = async () => {
-    axios.post("http://localhost:8010/biblio/estudante/login", {matricula: matricula, senha: senha})
-    .then(function (response) {
-      let nome = response.data.nome
-      localStorage.setItem("nomeuser", nome)
-      localStorage.setItem("idUser", response.data.idEstudante)
-      localStorage.setItem("isBiblio", response.data.isBiblio)
-      navigate('/')
-  })
-  .catch(function (error) {
-      console.log(error);
-      alert("Usuario ou senha incorreto")
-  });
-    
+    axios.post("http://189.8.205.53:8010/biblio/estudante/login", { matricula: matricula, senha: senha })
+      .then(function (response) {
+        const nome = response.data.nome
+        localStorage.setItem("nomeuser", nome)
+        localStorage.setItem("idUser", response.data.idEstudante)
+        localStorage.setItem("isBiblio", response.data.isBiblio)
+        navigate('/')
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("Usuario ou senha incorreto")
+      });
+
   };
 
   return (
     <div className='varela-round-regular h-[100vh] flex justify-center items-center ' >
       <form onSubmit={handleLogin} className=' border-2 border-black p-8 rounded-xl'>
-      <h1 className='text-center mb-10 '>Login Estudante</h1>
+        <h1 className='text-center mb-10 '>Login Estudante</h1>
         <div className='flex flex-col'>
           <label className='inputMatricula'>
             Matrícula
           </label>
           <input
-          required
-          className='bg-gray-300 border-none rounded-lg border mb-8'
+            required
+            className='bg-gray-300 border-none rounded-lg border mb-8'
             type="number"
             value={matricula}
             onChange={(e) => setMatricula(e.target.value)}
@@ -43,8 +43,8 @@ function Login() {
         <div className='flex flex-col'>
           <label className='inputSenha'>
             Senha</label>
-            <input
-            
+          <input
+
             className='bg-gray-300 border-none rounded-xl border'
             type="password"
             value={senha}
@@ -52,9 +52,9 @@ function Login() {
           />
         </div>
         <div className='flex  justify-center mt-8'>
-        <button className='botaoLogar border-none rounded-xl border p-2' type="button" onClick={handleLogin} >
-          Logar
-        </button>
+          <button className='botaoLogar border-none rounded-xl border p-2' type="button" onClick={handleLogin} >
+            Logar
+          </button>
         </div>
         <p className='mt-5'>
           Não possui cadastro?

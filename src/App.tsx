@@ -5,7 +5,7 @@ import Login from "./pages/login"
 import Livro from "./pages/livro/livro"
 import CadastroLivro from "./pages/livro/cadastroLivro"
 import GerenciarEmprestimo from "./pages/gerenciarEmprestimo"
-import { Alunos } from "./alunos"
+import { Alunos } from "./pages/aluno/gerenciarAluno"
 
 
 

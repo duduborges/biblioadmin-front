@@ -172,7 +172,7 @@ export default function CadastroLivro() {
                         <h3 className="text-2xl font-medium text-gray-900 dark:text-white">Cadastre o livro!</h3>
                         <form onSubmit={handleSubmit}>
                             <div>
-                                <div className="mb-2 block">
+                                <div className="mt-1 block">
                                     <Label htmlFor="titulo" value="Titulo" />
                                 </div>
                                 <TextInput
@@ -184,7 +184,7 @@ export default function CadastroLivro() {
                                 />
                             </div>
                             <div>
-                                <div className="mb-2 block">
+                                <div className="mb-1 block mt-4">
                                     <Label htmlFor="autor" value="Autor" />
                                 </div>
                                 <TextInput
@@ -196,7 +196,7 @@ export default function CadastroLivro() {
                                 />
                             </div>
                             <div>
-                                <div className="mb-2 block">
+                                <div className="mb-1 block mt-4">
                                     <Label htmlFor="editora" value="Editora" />
                                 </div>
                                 <TextInput
@@ -208,7 +208,7 @@ export default function CadastroLivro() {
                                 />
                             </div>
                             <div className="mb-4">
-                                <div className="mb-2 block">
+                                <div className="mb-1 block mt-4">
                                     <Label htmlFor="ano" value="Ano" />
                                 </div>
                                 <TextInput

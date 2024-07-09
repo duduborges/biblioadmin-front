@@ -3,36 +3,45 @@
 @tailwind utilities;
 
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
-html{
+
+html {
     height: 100vh;
     width: 100wh;
 }
+
 .varela-round-regular {
     font-family: "Archivo Black", sans-serif;
     font-weight: 550;
     font-style: normal;
-  }
-  
-body{
-    height: 100vh;
-    width: 100%; 
 }
 
-h1{
+body {
+    height: 100vh;
+    width: 100%;
+}
+
+h1 {
     margin-bottom: 3%;
     font-size: 2svi;
 }
-form{
+
+form {
     display: flex;
     flex-direction: column;
 }
 
-.botaoLogar{
-    background-color: #0E7490   ;
+.botaoLogar {
+    background-color: #0E7490;
     color: white;
     width: 40%;
+}
+
+.toasti {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }

@@ -3,9 +3,14 @@ import { Button, Label, Table, TextInput } from "flowbite-react"
 import React, { useEffect, useState } from "react";
 import Nav from "../../components/navbar";
 import { Modal } from "flowbite-react";
+import { IoTrashSharp } from "react-icons/io5";
+import { ImPencil } from "react-icons/im";
+import { Toast } from "flowbite-react";
+import { HiX } from "react-icons/hi";
+import { HiCheck } from "react-icons/hi2";
 
 interface AlunoProps {
-    IdEstudante: number,
+    idEstudante: number,
     matricula: number,
     email: string,
     nome: string,
@@ -68,19 +73,20 @@ function Alunos() {
 
     const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`http://189.8.205.53:8010/biblio/estudante/id/${id}`);
+            await axios.delete(`http://189.8.205.53:8010/biblio/estudante/${id}`);
             fetchAlunos();
             setIsDeleted(false)
         } catch (error) {
             console.error('Erro ao excluir o estudante:', error);
         }
+        console.log(id)
     }
 
     const handleUpdate = (estudante: AlunoProps) => {
         setOpenModal(true);
         setAdd(false);
         setNovoAluno({
-            idEstudante: estudante.IdEstudante,
+            idEstudante: estudante.idEstudante,
             matricula: estudante.matricula,
             email: estudante.email,
             nome: estudante.nome,
@@ -125,61 +131,81 @@ function Alunos() {
                                 <Table.Cell>{alunos.nome}</Table.Cell>
                                 <Table.Cell>{alunos.email}</Table.Cell>
                                 <Table.Cell>{alunos.telefone}</Table.Cell>
-
+                                <button onClick={() => handleUpdate(alunos)} className="text-xl text-white font-bold hover:underline dark:text-cyan-500">
+                                                <ImPencil />
+                                            </button>
+                                            <button onClick={() => handleDelete(alunos.idEstudante)} className="text-2xl text-gray font-bold hover:underline dark:text-cyan-500">
+                                                <IoTrashSharp />
+                                            </button>
                             </Table.Row>
                         ))}
                     </Table.Body>
                 </Table>
             </div>
+
+            {(!isDeleted ? (
+                        <>
+                            <Toast className="absolute z-10 toasti">
+                                <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
+                                    <HiX className="h-5 w-5" />
+                                </div>
+                                <div className="ml-3 text-sm font-normal">Livro deletado.</div>
+                                <Toast.Toggle onDismiss={() => setIsDeleted(true)} />
+                            </Toast>
+                        </>
+                    ) : null)
+                    }
+                    {
+                        (!isUpdated ? (
+                            <>
+                                <Toast className="absolute z-10 toasti">
+                                    <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-center dark:bg-green-800 dark:text-green-200">
+                                        <HiCheck className="h-5 w-5" />
+                                    </div>
+                                    <div className="ml-3 text-sm font-normal">{"Estudante atualizado com sucesso"}</div>
+                                    <Toast.Toggle onDismiss={() => setIsUpdated(true)} />
+                                </Toast>
+                            </>
+                        ) : null)
+                    }
+
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <Modal.Header />
                 <Modal.Body>
                     <div className="space-y-6">
-                        <h3 className="text-2xl font-medium text-gray-900 dark:text-white">Cadastre o Estudante!</h3>
+                        <h3 className="text-2xl font-medium text-gray-900 dark:text-white">Atualize o Estudante!</h3>
                         <form onSubmit={handleSubmit}>
                             <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="titulo" value="Titulo" />
+                                <div className="mt-1 block">
+                                    <Label htmlFor="nome" value="Nome" />
                                 </div>
                                 <TextInput
-                                    id="titulo"
-                                    name="titulo"
+                                    id="nome"
+                                    name="nome"
                                     value={novoAluno.nome}
                                     onChange={handleInputChange}
                                     required
                                 />
                             </div>
                             <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="matricula" value="Matricula" />
+                                <div className="block mt-4">
+                                    <Label htmlFor="email" value="Email" />
                                 </div>
                                 <TextInput
-                                    id="matricula"
-                                    name="autor"
-                                    value={novoAluno.matricula}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                    <Label htmlFor="editora" value="Editora" />
-                                </div>
-                                <TextInput
-                                    id="editora"
-                                    name="editora"
+                                    id="email "
+                                    name="email"
                                     value={novoAluno.email}
                                     onChange={handleInputChange}
                                     required
                                 />
                             </div>
-                            <div className="mb-4">
-                                <div className="mb-2 block">
-                                    <Label htmlFor="ano" value="Ano" />
+                            <div className="mt-4 block mb-4">
+                                <div className=" block">
+                                    <Label htmlFor="telefone" value="Telefone" />
                                 </div>
                                 <TextInput
-                                    id="ano"
-                                    name="ano"
+                                    id="telefone"
+                                    name="telefone"
                                     value={novoAluno.telefone}
                                     onChange={handleInputChange}
                                     required
@@ -187,7 +213,7 @@ function Alunos() {
                             </div>
                             <div className="w-full">
                                 <Button className="bg-green-500" type="submit">
-                                    {add ? 'Adicionar livro' : 'Atualizar livro'}
+                                    {'Atualizar Estudante'}
                                 </Button>
                             </div>
                         </form>

@@ -4,14 +4,12 @@ import { Button, Navbar } from "flowbite-react";
 
 import Nav from "../components/navbar";
 import { useNavigate } from "react-router-dom";
-import { funcao } from "../functio";
 
 export default function Home() {
   const [logado, setLogado] = useState(true)
   const navigate = useNavigate()
 
 
-  funcao()
 
 
   return (

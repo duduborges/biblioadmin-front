@@ -10,54 +10,75 @@ interface UserProps {
   matricula: string,
   email: string,
   telefone: string,
+  isBiblio: boolean,
+  senha: string
 }
 
 
 function Signin() {
-  const [users, setUsers] = useState<UserProps[]>([])
-  const nomeRef = useRef<HTMLInputElement | null>(null)
-  const matriculaRef = useRef<HTMLInputElement | null>(null)
-  const passwordRef = useRef<HTMLInputElement | null>(null)
-  const emailRef = useRef<HTMLInputElement | null>(null)
-  const reptpasswordRef = useRef<HTMLInputElement | null>(null)
-  const telefoneRef = useRef<HTMLInputElement | null>(null)
+  const [reptpasswordRef, setReptpasswordRef] = useState('')
+  const [novoUser, setNovoUser] = useState({
+    id: 0,
+    nome: '',
+    matricula: '',
+    email: '',
+    telefone: '',
+    isBiblio: false,
+    senha: ''
+  })
   const navigate = useNavigate()
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault()
 
-    if (!nomeRef.current?.value || !emailRef.current?.value || !passwordRef.current?.value) {
-      alert("Preencha todos os campos")
-      return
+  // async function handleSubmit(event: FormEvent) {
+  //   event.preventDefault()
+  //   if (!nomeRef.current?.value || !emailRef.current?.value || !passwordRef.current?.value) {
+  //     alert("Preencha todos os campos")
+  //     return
+  //   }
+  //   if (passwordRef.current?.value !== reptpasswordRef.current?.value) {
+  //     alert("As senhas nao coincidem")
+  //     return
+  //   }
+  //   try {
+  //     const response = await axios.post("http://localhost:8010/biblio/estudante")
+  //     alert("Usuario criado com sucesso!")
+  //     const nome = response.data.nome
+  //     localStorage.setItem("nomeuser", nome)
+
+  //     navigate("/")
+  //   } catch (error) {
+  //     alert("Ocorreu um erro ao criar o usuário")
+  //   }
+  // }
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setNovoUser((prevAluno) => ({
+      ...prevAluno,
+      [name]: value,
+    }));
+  };
+  const senha = novoUser.senha
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (senha == reptpasswordRef) {
+      alert("As senhas não coincidem!")
     }
-
-    if (passwordRef.current?.value !== reptpasswordRef.current?.value) {
-      alert("As senhas nao coincidem")
-      return
-    }
-
     try {
-      const response = await axios.post("http://189.8.205.53:8010/biblio/estudante", {
-        nome: nomeRef.current?.value,
-        email: emailRef.current?.value,
-        senha: passwordRef.current?.value,
-        matricula: matriculaRef.current?.value,
-        telefone: telefoneRef.current?.value,
-      })
-      alert("usuario criado com sucesso!")
-
-      const nome = response.data.nome
-      localStorage.setItem("nomeuser", nome)
-
+      const response = await axios.post('http://localhost:8010/biblio/estudante', novoUser);
+      const id = response.data
+      const dadosUser = await axios.get(`http://localhost:8010/biblio/estudante/id/${id}`)
+      localStorage.setItem("nomeuser", dadosUser.data.nome)
+      localStorage.setItem("idUser", dadosUser.data.idEstudante)
+      localStorage.setItem("isBiblio", dadosUser.data.isBiblio)
       navigate("/")
     } catch (error) {
-      alert("Ocorreu um erro ao criar o usuário")
+      console.error('Erro ao salvar o estudante:', error);
     }
-  }
+  };
 
   return (
     <>
       <div className='varela-round-regular h-[100vh] flex justify-center items-center ' >
-        <form className=' border-2 border-black p-8 rounded-xl'>
+        <form onSubmit={handleSubmit} className=' border-2 border-black p-8 rounded-xl'>
           <h1 className='text-center mb-10 '>Cadastro Estudante</h1>
           <div className="flex flex-row">
 
@@ -67,8 +88,10 @@ function Signin() {
                   Nome
                 </label>
                 <input
-                  ref={nomeRef}
-
+                  id="nome"
+                  name="nome"
+                  value={novoUser.nome}
+                  onChange={handleInputChange}
                   className='bg-gray-300 border-none rounded-lg border mb-8'
                   type="text"
                 />
@@ -77,7 +100,10 @@ function Signin() {
                 <label className='inputSenha'>
                   Matricula</label>
                 <input
-                  ref={matriculaRef}
+                  id="matricula"
+                  name="matricula"
+                  value={novoUser.matricula}
+                  onChange={handleInputChange}
                   className='bg-gray-300 border-none rounded-xl border mb-8'
                   type="number"
                 />
@@ -86,7 +112,10 @@ function Signin() {
                 <label className='inputSenha'>
                   E-mail</label>
                 <input
-                  ref={emailRef}
+                  id="email"
+                  name="email"
+                  value={novoUser.email}
+                  onChange={handleInputChange}
                   className='bg-gray-300 border-none rounded-xl border mb-4'
                   type="text"
                 />
@@ -98,7 +127,10 @@ function Signin() {
                 <label className='inputSenha'>
                   Telefone</label>
                 <input
-                  ref={telefoneRef}
+                  id="telefone"
+                  name="telefone"
+                  value={novoUser.telefone}
+                  onChange={handleInputChange}
                   className='bg-gray-300 border-none rounded-xl border mb-8'
                   type="text"
                 />
@@ -107,7 +139,10 @@ function Signin() {
                 <label className='inputSenha'>
                   Senha</label>
                 <input
-                  ref={passwordRef}
+                  id="senha"
+                  name="senha"
+                  value={novoUser.senha}
+                  onChange={handleInputChange}
                   className='bg-gray-300 border-none rounded-xl border mb-8'
                   type="password"
                 />
@@ -116,7 +151,10 @@ function Signin() {
                 <label className='inputSenha'>
                   Repetir senha</label>
                 <input
-                  ref={reptpasswordRef}
+                  id="reptsenha"
+                  name="reptsenha"
+                  value={reptpasswordRef}
+                  onChange={(e) => setReptpasswordRef(e.target.value)}
                   className='bg-gray-300 border-none rounded-xl border'
                   type="password"
                 />
@@ -125,13 +163,13 @@ function Signin() {
           </div>
 
           <div className='flex  justify-center mt-8'>
-            <button onClick={handleSubmit} className='botaoLogar p-2 border-none rounded-xl border' type="button" >
+            <button className='botaoLogar p-2 border-none rounded-xl border' type="submit" >
               Cadastrar
             </button>
           </div>
           <p className='mt-5 flex  justify-center'>
             Já possui uma conta?
-            <a href='/login' className='ml-2 underline'> Faça login</a>
+            <a className='ml-2 underline'> Faça login</a>
           </p>
         </form>
       </div>

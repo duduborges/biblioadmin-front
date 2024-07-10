@@ -23,7 +23,7 @@ export default function Nav() {
   });
 
   function deletar() {
-    localStorage.removeItem("nomeuser");
+    localStorage.clear()
     navigate("/")
   }
 
@@ -54,7 +54,6 @@ export default function Nav() {
             <Navbar.Collapse>
               <Navbar.Link href="/gerenciarEmprestimo">Emprestimos</Navbar.Link>
               <Navbar.Link href="/aluno">Alunos</Navbar.Link>
-              <Navbar.Link href="/livro">Livros</Navbar.Link>
               <Navbar.Link href="/cadastroLivro">Cadastrar Livros</Navbar.Link>
             </Navbar.Collapse>
           </Navbar>
@@ -81,7 +80,7 @@ export default function Nav() {
             </div>
             <Navbar.Collapse>
               <Navbar.Link href="/gerenciarEmprestimo">Emprestimo</Navbar.Link>
-              <Navbar.Link href="/livro">Livros</Navbar.Link>
+              <Navbar.Link href="/cadastroLivro">Livros</Navbar.Link>
             </Navbar.Collapse>
 
           </Navbar>

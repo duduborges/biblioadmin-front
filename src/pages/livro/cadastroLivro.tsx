@@ -16,9 +16,18 @@ interface LivroProps {
 
 export default function CadastroLivro() {
     const [livro, setLivro] = useState<LivroProps[]>([]);
+    const [isblibliotecario, setIsblibliotecario] = useState(false)
     const [openModal, setOpenModal] = useState(false);
     const [add, setAdd] = useState(true);
     const [isDeleted, setIsDeleted] = useState(true)
+    const biblio = localStorage.getItem("isBiblio")
+    useEffect(() => {
+        if (biblio == "true") {
+            setIsblibliotecario(true)
+        } else {
+            setIsblibliotecario(false)
+        }
+    });
     const [isUpdated, setIsUpdated] = useState(true)
     const [novoLivro, setNovoLivro] = useState({
         idLivro: 0,
@@ -104,67 +113,102 @@ export default function CadastroLivro() {
     return (
         <>
             <Nav />
-            <div className="w-11/12 m-auto py-3 ">
-                <div className="w-full justify-end flex ">
-                    <button onClick={() => setOpenModal(true)} className="py-2 px-5  rounded-t-lg text-white font-bold bg-blue-400 hover:bg-blue-600">Adicionar livro</button>
-                </div>
-                <Table className="" >
-                    <Table.Head className="bg-cyan-200 text-lg">
-                        <Table.HeadCell>Título</Table.HeadCell>
-                        <Table.HeadCell>Autor</Table.HeadCell>
-                        <Table.HeadCell>Editora</Table.HeadCell>
-                        <Table.HeadCell >Ano</Table.HeadCell>
-                        <Table.HeadCell className="text-center">
-                            <span className="">gerenciar</span>
-                        </Table.HeadCell>
-                    </Table.Head>
-                    <Table.Body className="divide-y">
-                        {livro.map((livros) => (
-                            <Table.Row key={livros.idLivro} className="bg-blue-400 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell className="whitespace-nowrap font-bold text-white dark:text-white">
-                                    {livros.titulo}
-                                </Table.Cell>
-                                <Table.Cell>{livros.autor}</Table.Cell>
-                                <Table.Cell>{livros.editora}</Table.Cell>
-                                <Table.Cell>{livros.ano}</Table.Cell>
-                                <Table.Cell className="flex gap-4 justify-center">
-                                    <button onClick={() => handleUpdate(livros)} className="text-xl text-white font-bold hover:underline dark:text-cyan-500">
-                                        <ImPencil />
-                                    </button>
-                                    <button onClick={() => handleDelete(livros.idLivro)} className="text-2xl text-gray font-bold hover:underline dark:text-cyan-500">
-                                        <IoTrashSharp />
-                                    </button>
-                                </Table.Cell>
-                            </Table.Row>
-                        ))}
-                    </Table.Body>
-                </Table>
-            </div >
-            {(!isDeleted ? (
+            {isblibliotecario ? (
                 <>
-                    <Toast className="absolute z-10 toasti">
-                        <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
-                            <HiX className="h-5 w-5" />
+                    <div className="w-11/12 m-auto py-3 ">
+                        <div className="w-full justify-end flex ">
+                            <button onClick={() => setOpenModal(true)} className="py-2 px-5  rounded-t-lg text-white font-bold bg-blue-400 hover:bg-blue-600">Adicionar livro</button>
                         </div>
-                        <div className="ml-3 text-sm font-normal">Livro deletado.</div>
-                        <Toast.Toggle onDismiss={() => setIsDeleted(true)} />
-                    </Toast>
+                        <Table className="" >
+                            <Table.Head className="bg-cyan-200 text-lg">
+                                <Table.HeadCell>Título</Table.HeadCell>
+                                <Table.HeadCell>Autor</Table.HeadCell>
+                                <Table.HeadCell>Editora</Table.HeadCell>
+                                <Table.HeadCell >Ano</Table.HeadCell>
+                                <Table.HeadCell className="text-center">
+                                    <span className="">Gerenciar</span>
+                                </Table.HeadCell>
+                            </Table.Head>
+                            <Table.Body className="divide-y">
+                                {livro.map((livros) => (
+                                    <Table.Row key={livros.idLivro} className="bg-blue-400 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
+                                        <Table.Cell className="whitespace-nowrap font-bold text-white dark:text-white">
+                                            {livros.titulo}
+                                        </Table.Cell>
+                                        <Table.Cell>{livros.autor}</Table.Cell>
+                                        <Table.Cell>{livros.editora}</Table.Cell>
+                                        <Table.Cell>{livros.ano}</Table.Cell>
+                                        <Table.Cell className="flex gap-4 justify-center">
+                                            <button onClick={() => handleUpdate(livros)} className="text-xl text-white font-bold hover:underline dark:text-cyan-500">
+                                                <ImPencil />
+                                            </button>
+                                            <button onClick={() => handleDelete(livros.idLivro)} className="text-2xl text-gray font-bold hover:underline dark:text-cyan-500">
+                                                <IoTrashSharp />
+                                            </button>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                ))}
+                            </Table.Body>
+                        </Table>
+                    </div >
+                    {(!isDeleted ? (
+                        <>
+                            <Toast className="absolute z-10 toasti">
+                                <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
+                                    <HiX className="h-5 w-5" />
+                                </div>
+                                <div className="ml-3 text-sm font-normal">Livro deletado.</div>
+                                <Toast.Toggle onDismiss={() => setIsDeleted(true)} />
+                            </Toast>
+                        </>
+                    ) : null)
+                    }
+                    {
+                        (!isUpdated ? (
+                            <>
+                                <Toast className="absolute z-10 toasti">
+                                    <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-center dark:bg-green-800 dark:text-green-200">
+                                        <HiCheck className="h-5 w-5" />
+                                    </div>
+                                    <div className="ml-3 text-sm font-normal">{add ? "Livro adicionado com sucesso!" : "Livro atualizado com sucesso"}</div>
+                                    <Toast.Toggle onDismiss={() => setIsUpdated(true)} />
+                                </Toast>
+                            </>
+                        ) : null)
+                    }
+
                 </>
-            ) : null)
-            }
-            {
-                (!isUpdated ? (
-                    <>
-                        <Toast className="absolute z-10 toasti">
-                            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-center dark:bg-green-800 dark:text-green-200">
-                                <HiCheck className="h-5 w-5" />
-                            </div>
-                            <div className="ml-3 text-sm font-normal">{add ? "Livro adicionado com sucesso!" : "Livro atualizado com sucesso"}</div>
-                            <Toast.Toggle onDismiss={() => setIsUpdated(true)} />
-                        </Toast>
-                    </>
-                ) : null)
-            }
+            ) : (
+                <>
+                    <div className="w-11/12 m-auto py-3 ">
+                        <div className="w-full justify-end flex ">
+                            <button onClick={() => setOpenModal(true)} className="py-2 px-5  rounded-t-lg text-white font-bold bg-blue-400 hover:bg-blue-600">Adicionar livro</button>
+                        </div>
+                        <Table className="" >
+                            <Table.Head className="bg-cyan-200 text-lg">
+                                <Table.HeadCell>Título</Table.HeadCell>
+                                <Table.HeadCell>Autor</Table.HeadCell>
+                                <Table.HeadCell>Editora</Table.HeadCell>
+                                <Table.HeadCell >Ano</Table.HeadCell>
+                            </Table.Head>
+                            <Table.Body className="divide-y">
+                                {livro.map((livros) => (
+                                    <Table.Row key={livros.idLivro} className="bg-blue-400 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
+                                        <Table.Cell className="whitespace-nowrap font-bold text-white dark:text-white">
+                                            {livros.titulo}
+                                        </Table.Cell>
+                                        <Table.Cell>{livros.autor}</Table.Cell>
+                                        <Table.Cell>{livros.editora}</Table.Cell>
+                                        <Table.Cell>{livros.ano}</Table.Cell>
+
+                                    </Table.Row>
+                                ))}
+                            </Table.Body>
+                        </Table>
+                    </div >
+                </>
+            )}
+
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <Modal.Header />
                 <Modal.Body>

@@ -28,27 +28,6 @@ function Signin() {
   })
   const navigate = useNavigate()
 
-  // async function handleSubmit(event: FormEvent) {
-  //   event.preventDefault()
-  //   if (!nomeRef.current?.value || !emailRef.current?.value || !passwordRef.current?.value) {
-  //     alert("Preencha todos os campos")
-  //     return
-  //   }
-  //   if (passwordRef.current?.value !== reptpasswordRef.current?.value) {
-  //     alert("As senhas nao coincidem")
-  //     return
-  //   }
-  //   try {
-  //     const response = await axios.post("http://localhost:8010/biblio/estudante")
-  //     alert("Usuario criado com sucesso!")
-  //     const nome = response.data.nome
-  //     localStorage.setItem("nomeuser", nome)
-
-  //     navigate("/")
-  //   } catch (error) {
-  //     alert("Ocorreu um erro ao criar o usuário")
-  //   }
-  // }
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setNovoUser((prevAluno) => ({
@@ -63,9 +42,9 @@ function Signin() {
       alert("As senhas não coincidem!")
     }
     try {
-      const response = await axios.post('http://localhost:8010/biblio/estudante', novoUser);
+      const response = await axios.post('http://189.8.205.53:8010/biblio/estudante', novoUser);
       const id = response.data
-      const dadosUser = await axios.get(`http://localhost:8010/biblio/estudante/id/${id}`)
+      const dadosUser = await axios.get(`http://189.8.205.53:8010/biblio/estudante/id/${id}`)
       localStorage.setItem("nomeuser", dadosUser.data.nome)
       localStorage.setItem("idUser", dadosUser.data.idEstudante)
       localStorage.setItem("isBiblio", dadosUser.data.isBiblio)

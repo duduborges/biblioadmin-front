@@ -109,7 +109,7 @@ function Alunos() {
             <Nav />
             <div className="w-11/12 m-auto pt-3 ">
                 <Table className="" >
-                    <Table.Head className="bg-cyan-200">
+                    <Table.Head className="bg-cyan-200 text-lg">
                         <Table.HeadCell>Matricula</Table.HeadCell>
                         <Table.HeadCell>Nome</Table.HeadCell>
                         <Table.HeadCell>Email</Table.HeadCell>
@@ -117,9 +117,9 @@ function Alunos() {
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {aluno.map((alunos, index) => (
-                            <Table.Row key={index} className="bg-cyan-200 dark:border-gray-700 dark:bg-gray-800">
+                            <Table.Row key={index} className="bg-blue-400 hover:scale-[1.01] transition-all duration-300 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
 
-                                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                <Table.Cell className="font-bold text-white dark:border-gray-700 dark:bg-gray-800">
                                     {alunos.matricula}
                                 </Table.Cell>
                                 <Table.Cell>{alunos.nome}</Table.Cell>

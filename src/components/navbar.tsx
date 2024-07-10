@@ -54,7 +54,7 @@ export default function Nav() {
             <Navbar.Collapse>
               <Navbar.Link href="/gerenciarEmprestimo">Emprestimos</Navbar.Link>
               <Navbar.Link href="/aluno">Alunos</Navbar.Link>
-              <Navbar.Link href="/cadastroLivro">Cadastrar Livros</Navbar.Link>
+              <Navbar.Link href="/cadastroLivro">Livros</Navbar.Link>
             </Navbar.Collapse>
           </Navbar>
         </>

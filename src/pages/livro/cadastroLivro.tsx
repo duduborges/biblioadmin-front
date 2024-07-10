@@ -116,6 +116,7 @@ export default function CadastroLivro() {
             {isblibliotecario ? (
                 <>
                     <div className="w-11/12 m-auto py-3 ">
+
                         <div className="w-full justify-end flex ">
                             <button onClick={() => setOpenModal(true)} className="py-2 px-5  rounded-t-lg text-white font-bold bg-blue-400 hover:bg-blue-600">Adicionar livro</button>
                         </div>
@@ -131,7 +132,7 @@ export default function CadastroLivro() {
                             </Table.Head>
                             <Table.Body className="divide-y">
                                 {livro.map((livros) => (
-                                    <Table.Row key={livros.idLivro} className="bg-blue-400 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
+                                    <Table.Row key={livros.idLivro} className="bg-blue-400 hover:scale-[1.01] hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800 transition-all duration-300">
                                         <Table.Cell className="whitespace-nowrap font-bold text-white dark:text-white">
                                             {livros.titulo}
                                         </Table.Cell>
@@ -181,9 +182,6 @@ export default function CadastroLivro() {
             ) : (
                 <>
                     <div className="w-11/12 m-auto py-3 ">
-                        <div className="w-full justify-end flex ">
-                            <button onClick={() => setOpenModal(true)} className="py-2 px-5  rounded-t-lg text-white font-bold bg-blue-400 hover:bg-blue-600">Adicionar livro</button>
-                        </div>
                         <Table className="" >
                             <Table.Head className="bg-cyan-200 text-lg">
                                 <Table.HeadCell>Título</Table.HeadCell>
@@ -193,14 +191,13 @@ export default function CadastroLivro() {
                             </Table.Head>
                             <Table.Body className="divide-y">
                                 {livro.map((livros) => (
-                                    <Table.Row key={livros.idLivro} className="bg-blue-400 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
+                                    <Table.Row key={livros.idLivro} className="bg-blue-400 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800 transition-all duration-300">
                                         <Table.Cell className="whitespace-nowrap font-bold text-white dark:text-white">
                                             {livros.titulo}
                                         </Table.Cell>
                                         <Table.Cell>{livros.autor}</Table.Cell>
                                         <Table.Cell>{livros.editora}</Table.Cell>
                                         <Table.Cell>{livros.ano}</Table.Cell>
-
                                     </Table.Row>
                                 ))}
                             </Table.Body>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Nav from "../components/navbar";
+import Nav from "../../components/navbar";
 import axios from "axios";
 import { Table } from "flowbite-react";
 
@@ -26,7 +26,7 @@ interface emprestimoProps {
     idEmprestimo: number
 }
 
-export default function GerenciarEmprestimo() {
+export default function MeusEmprestimos() {
     const [emprestimo, setEmprestimo] = useState<emprestimoProps | null>(null);
     const IdEmprestimo = localStorage.getItem("idUser")
 
@@ -48,7 +48,6 @@ export default function GerenciarEmprestimo() {
             <Nav />
 
             <div className="w-11/12 m-auto pt-3 ">
-
                 <Table className="" >
                     <Table.Head className="bg-cyan-200">
                         <Table.HeadCell>Livro</Table.HeadCell>

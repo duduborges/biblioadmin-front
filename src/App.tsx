@@ -3,8 +3,9 @@ import Home from "./pages/home"
 import { Signin } from "./pages/signin"
 import Login from "./pages/login"
 import CadastroLivro from "./pages/livro/cadastroLivro"
-import GerenciarEmprestimo from "./pages/gerenciarEmprestimo"
 import { Alunos } from "./pages/aluno/gerenciarAluno"
+import MeusEmprestimos from "./pages/emprestimo/meusEmprestimos"
+import { GerenciarEmprestimos } from "./pages/emprestimo/gerenciarEmprestimo"
 
 
 
@@ -22,8 +23,8 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
-    path: '/gerenciarEmprestimo',
-    element: <GerenciarEmprestimo />
+    path: '/meusEmprestimos',
+    element: <MeusEmprestimos />
   },
   {
     path: '/cadastroLivro',
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   }, {
     path: '/aluno',
     element: <Alunos />
+  },
+  {
+    path: '/gerenciarEmprestimo',
+    element: <GerenciarEmprestimos />
   }
 ])
 

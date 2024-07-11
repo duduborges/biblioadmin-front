@@ -27,7 +27,7 @@ function Alunos() {
     const [, setAdd] = useState(true);
     const [isDeleted, setIsDeleted] = useState(true);
     const [isUpdated, setIsUpdated] = useState(true);
-
+    const [pagina, setPagina] = useState(1)
     const [novoAluno, setNovoAluno] = useState({
         idEstudante: 0,
         matricula: 0,
@@ -37,6 +37,8 @@ function Alunos() {
         telefone: '',
         senha: ''
     });
+
+   
 
     function onCloseModal() {
         setAdd(true);
@@ -65,7 +67,7 @@ function Alunos() {
         event.preventDefault();
         try {
 
-            await axios.put("http://189.8.205.53:8010/biblio/estudante", novoAluno,);
+            await axios.put(`http://189.8.205.53:8010/biblio/estudante`, novoAluno,);
 
             fetchAlunos();
             onCloseModal();
@@ -106,7 +108,7 @@ function Alunos() {
     const fetchAlunos = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante`);
+            const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante/pag/${pagina}`);
             setAluno(response.data);
             console.log(response.data)
         } catch (error) {
@@ -118,7 +120,7 @@ function Alunos() {
 
     useEffect(() => {
         fetchAlunos();
-    }, []);
+    }, [pagina]);
 
 
     return (
@@ -164,6 +166,12 @@ function Alunos() {
                             </Table.Body>
                         </Table>
                     </>)}
+                    <div className="w-full bg-black h-[1px] mt-2"></div>
+                <div className="flex flex-row items-center gap-3 mt-2 pb-4 justify-center ">
+                    <button className="bg-cyan-300 p-2 rounded-lg text-white font-bold" onClick={() => setPagina(pagina - 1 )}>Pagina anterior</button>
+                    <p className="text-cyan-200 bg-slate-400 w-8 text-center flex justify-center items-center h-8 rounded-full">{pagina}</p>
+                    <button className="bg-cyan-300 p-2 rounded-lg text-white font-bold" onClick={() => setPagina(pagina + 1)}>Proxima pagina</button>
+                </div>
             </div>
 
             {(!isDeleted ? (

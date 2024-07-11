@@ -42,9 +42,9 @@ function Signin() {
       alert("As senhas não coincidem!")
     }
     try {
-      const response = await axios.post('http://189.8.205.53:8010/biblio/estudante', novoUser);
+      const response = await axios.post('http://localhost:8010/biblio/estudante', novoUser);
       const id = response.data
-      const dadosUser = await axios.get(`http://189.8.205.53:8010/biblio/estudante/id/${id}`)
+      const dadosUser = await axios.get(`http://localhost:8010/biblio/estudante/id/${id}`)
       localStorage.setItem("nomeuser", dadosUser.data.nome)
       localStorage.setItem("idUser", dadosUser.data.idEstudante)
       localStorage.setItem("isBiblio", dadosUser.data.isBiblio)

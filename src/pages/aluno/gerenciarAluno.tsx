@@ -58,9 +58,9 @@ function Alunos() {
         event.preventDefault();
         try {
             if (add) {
-                await axios.post('http://189.8.205.53:8010/biblio/livro', novoAluno);
+                await axios.post('http://localhost:8010/biblio/livro', novoAluno);
             } else {
-                await axios.put("http://189.8.205.53:8010/biblio/livro", novoAluno,);
+                await axios.put("http://localhost:8010/biblio/livro", novoAluno,);
             }
             fetchAlunos();
             onCloseModal();
@@ -73,7 +73,7 @@ function Alunos() {
 
     const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`http://189.8.205.53:8010/biblio/estudante/${id}`);
+            await axios.delete(`http://localhost:8010/biblio/estudante/${id}`);
             fetchAlunos();
             setIsDeleted(false)
         } catch (error) {
@@ -97,7 +97,7 @@ function Alunos() {
 
     const fetchAlunos = async () => {
         try {
-            const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante`);
+            const response = await axios.get(`http://localhost:8010/biblio/estudante`);
             setAluno(response.data);
             console.log(response.data)
         } catch (error) {

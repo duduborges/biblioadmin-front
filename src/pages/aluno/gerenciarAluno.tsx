@@ -67,7 +67,7 @@ function Alunos() {
         event.preventDefault();
         try {
 
-            await axios.put(`https://189.8.205.53:8010/biblio/estudante`, novoAluno,);
+            await axios.put(`http://189.8.205.53:8010/biblio/estudante`, novoAluno,);
 
             fetchAlunos();
             onCloseModal();
@@ -80,7 +80,7 @@ function Alunos() {
 
     const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`https://189.8.205.53:8010/biblio/estudante/${id}`);
+            await axios.delete(`http://189.8.205.53:8010/biblio/estudante/${id}`);
             fetchAlunos();
             setIsDeleted(false)
         } catch (error) {
@@ -90,7 +90,7 @@ function Alunos() {
     }
 
     const handleUpdate = async (estudante: AlunoProps) => {
-        const response = await axios.get(`https://189.8.205.53:8010/biblio/estudante/id/${estudante.idEstudante}`);
+        const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante/id/${estudante.idEstudante}`);
         setOpenModal(true);
         setAdd(false);
         setNovoAluno({
@@ -108,7 +108,7 @@ function Alunos() {
     const fetchAlunos = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`https://189.8.205.53:8010/biblio/estudante/pag/${pagina}`);
+            const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante/pag/${pagina}`);
             setAluno(response.data);
             console.log(response.data)
         } catch (error) {

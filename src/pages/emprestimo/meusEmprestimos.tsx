@@ -33,7 +33,7 @@ export default function MeusEmprestimos() {
 
     const fetchLivros = async () => {
         try {
-            const response = await axios.get(`https://189.8.205.53:8010/biblio/emprestimo/id/${IdEmprestimo}`);
+            const response = await axios.get(`http://189.8.205.53:8010/biblio/emprestimo/id/${IdEmprestimo}`);
             setEmprestimo(response.data);
             console.log(response.data)
         } catch (error) {

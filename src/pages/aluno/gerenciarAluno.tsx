@@ -78,7 +78,7 @@ function Alunos() {
 
     const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`http://localhost:8010/biblio/estudante/${id}`);
+            await axios.delete(`http://189.8.205.53:8010/biblio/estudante/${id}`);
             fetchAlunos();
             setIsDeleted(false)
         } catch (error) {
@@ -106,7 +106,7 @@ function Alunos() {
     const fetchAlunos = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:8010/biblio/estudante`);
+            const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante`);
             setAluno(response.data);
             console.log(response.data)
         } catch (error) {

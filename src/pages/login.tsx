@@ -9,7 +9,7 @@ function Login() {
   const [senha, setSenha] = useState('');
 
   const handleLogin = async () => {
-    axios.post("http://localhost:8010/biblio/estudante/login", { matricula: matricula, senha: senha })
+    axios.post("http://189.8.205.53:8010/biblio/estudante/login", { matricula: matricula, senha: senha })
       .then(function (response) {
         const nome = response.data.nome
         localStorage.setItem("nomeuser", nome)

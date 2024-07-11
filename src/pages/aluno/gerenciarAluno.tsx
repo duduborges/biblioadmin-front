@@ -24,7 +24,7 @@ function Alunos() {
     const [aluno, setAluno] = useState<AlunoProps[]>([]);
     const [loading, setLoading] = useState(true);
     const [openModal, setOpenModal] = useState(false);
-    const [add, setAdd] = useState(true);
+    const [, setAdd] = useState(true);
     const [isDeleted, setIsDeleted] = useState(true);
     const [isUpdated, setIsUpdated] = useState(true);
 

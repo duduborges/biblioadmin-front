@@ -1,18 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Label, TextInput } from "flowbite-react";
-import React, { useState, useEffect, useRef, FormEvent } from 'react';
+
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-interface UserProps {
-  id: number,
-  nome: string,
-  matricula: string,
-  email: string,
-  telefone: string,
-  isBiblio: boolean,
-  senha: string
-}
+
 
 
 function Signin() {

@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
-import { Button, Label, Table, TextInput } from "flowbite-react"
+import { Button, Label, Spinner, Table, TextInput } from "flowbite-react"
 import React, { useEffect, useState } from "react";
 import Nav from "../../components/navbar";
 import { Modal } from "flowbite-react";
@@ -13,13 +14,15 @@ interface AlunoProps {
     idEstudante: number,
     matricula: number,
     email: string,
+    isBiblio: boolean
     nome: string,
     telefone: string
+    senha: string
 }
 
 function Alunos() {
-
     const [aluno, setAluno] = useState<AlunoProps[]>([]);
+    const [loading, setLoading] = useState(true);
     const [openModal, setOpenModal] = useState(false);
     const [add, setAdd] = useState(true);
     const [isDeleted, setIsDeleted] = useState(true);
@@ -29,8 +32,10 @@ function Alunos() {
         idEstudante: 0,
         matricula: 0,
         email: '',
+        isBiblio: false,
         nome: '',
-        telefone: ''
+        telefone: '',
+        senha: ''
     });
 
     function onCloseModal() {
@@ -40,8 +45,10 @@ function Alunos() {
             idEstudante: 0,
             matricula: 0,
             email: '',
+            isBiblio: false,
             nome: '',
-            telefone: ''
+            telefone: '',
+            senha: ''
         });
     }
 
@@ -57,11 +64,9 @@ function Alunos() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            if (add) {
-                await axios.post('http://localhost:8010/biblio/livro', novoAluno);
-            } else {
-                await axios.put("http://localhost:8010/biblio/livro", novoAluno,);
-            }
+
+            await axios.put("http://189.8.205.53:8010/biblio/estudante", novoAluno,);
+
             fetchAlunos();
             onCloseModal();
             setIsUpdated(false)
@@ -82,7 +87,8 @@ function Alunos() {
         console.log(id)
     }
 
-    const handleUpdate = (estudante: AlunoProps) => {
+    const handleUpdate = async (estudante: AlunoProps) => {
+        const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante/id/${estudante.idEstudante}`);
         setOpenModal(true);
         setAdd(false);
         setNovoAluno({
@@ -90,18 +96,23 @@ function Alunos() {
             matricula: estudante.matricula,
             email: estudante.email,
             nome: estudante.nome,
-            telefone: estudante.telefone
+            telefone: estudante.telefone,
+            isBiblio: response.data.isBiblio,
+            senha: response.data.senha
         })
     }
 
 
     const fetchAlunos = async () => {
+        setLoading(true);
         try {
             const response = await axios.get(`http://localhost:8010/biblio/estudante`);
             setAluno(response.data);
             console.log(response.data)
         } catch (error) {
             console.error('Erro ao buscar o estudante:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -114,60 +125,72 @@ function Alunos() {
         <>
             <Nav />
             <div className="w-11/12 m-auto pt-3 ">
-                <Table className="" >
-                    <Table.Head className="bg-cyan-200 text-lg">
-                        <Table.HeadCell>Matricula</Table.HeadCell>
-                        <Table.HeadCell>Nome</Table.HeadCell>
-                        <Table.HeadCell>Email</Table.HeadCell>
-                        <Table.HeadCell>Telefone</Table.HeadCell>
-                    </Table.Head>
-                    <Table.Body className="divide-y">
-                        {aluno.map((alunos, index) => (
-                            <Table.Row key={index} className="bg-blue-400 hover:scale-[1.01] transition-all duration-300 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
+                {loading ? (
+                    <div className="flex justify-center items-center h-64">
+                        <Spinner size="xl" />
+                    </div>
+                ) : (
+                    <>
+                        <Table className="" >
+                            <Table.Head className="bg-cyan-200 text-lg">
+                                <Table.HeadCell>Matricula</Table.HeadCell>
+                                <Table.HeadCell>Nome</Table.HeadCell>
+                                <Table.HeadCell>Email</Table.HeadCell>
+                                <Table.HeadCell>Telefone</Table.HeadCell>
+                                <Table.HeadCell className=" text-center">
+                                    gerenciar
+                                </Table.HeadCell>
+                            </Table.Head>
+                            <Table.Body className="divide-y">
+                                {aluno.map((alunos, index) => (
+                                    <Table.Row key={index} className="bg-blue-400 hover:scale-[1.01] transition-all duration-300 hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800">
 
-                                <Table.Cell className="font-bold text-white dark:border-gray-700 dark:bg-gray-800">
-                                    {alunos.matricula}
-                                </Table.Cell>
-                                <Table.Cell>{alunos.nome}</Table.Cell>
-                                <Table.Cell>{alunos.email}</Table.Cell>
-                                <Table.Cell>{alunos.telefone}</Table.Cell>
-                                <button onClick={() => handleUpdate(alunos)} className="text-xl text-white font-bold hover:underline dark:text-cyan-500">
+                                        <Table.Cell className="font-bold text-white dark:border-gray-700 dark:bg-gray-800">
+                                            {alunos.matricula}
+                                        </Table.Cell>
+                                        <Table.Cell>{alunos.nome}</Table.Cell>
+                                        <Table.Cell>{alunos.email}</Table.Cell>
+                                        <Table.Cell>{alunos.telefone}</Table.Cell>
+                                        <Table.Cell className="flex justify-center gap-8">
+                                            <button onClick={() => handleUpdate(alunos)} className="text-xl text-white font-bold hover:underline dark:text-cyan-500">
                                                 <ImPencil />
                                             </button>
                                             <button onClick={() => handleDelete(alunos.idEstudante)} className="text-2xl text-gray font-bold hover:underline dark:text-cyan-500">
                                                 <IoTrashSharp />
                                             </button>
-                            </Table.Row>
-                        ))}
-                    </Table.Body>
-                </Table>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                ))}
+                            </Table.Body>
+                        </Table>
+                    </>)}
             </div>
 
             {(!isDeleted ? (
-                        <>
-                            <Toast className="absolute z-10 toasti">
-                                <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
-                                    <HiX className="h-5 w-5" />
-                                </div>
-                                <div className="ml-3 text-sm font-normal">Livro deletado.</div>
-                                <Toast.Toggle onDismiss={() => setIsDeleted(true)} />
-                            </Toast>
-                        </>
-                    ) : null)
-                    }
-                    {
-                        (!isUpdated ? (
-                            <>
-                                <Toast className="absolute z-10 toasti">
-                                    <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-center dark:bg-green-800 dark:text-green-200">
-                                        <HiCheck className="h-5 w-5" />
-                                    </div>
-                                    <div className="ml-3 text-sm font-normal">{"Estudante atualizado com sucesso"}</div>
-                                    <Toast.Toggle onDismiss={() => setIsUpdated(true)} />
-                                </Toast>
-                            </>
-                        ) : null)
-                    }
+                <>
+                    <Toast className="absolute z-10 toasti">
+                        <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
+                            <HiX className="h-5 w-5" />
+                        </div>
+                        <div className="ml-3 text-sm font-normal">Livro deletado.</div>
+                        <Toast.Toggle onDismiss={() => setIsDeleted(true)} />
+                    </Toast>
+                </>
+            ) : null)
+            }
+            {
+                (!isUpdated ? (
+                    <>
+                        <Toast className="absolute z-10 toasti">
+                            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-center dark:bg-green-800 dark:text-green-200">
+                                <HiCheck className="h-5 w-5" />
+                            </div>
+                            <div className="ml-3 text-sm font-normal">{"Estudante atualizado com sucesso"}</div>
+                            <Toast.Toggle onDismiss={() => setIsUpdated(true)} />
+                        </Toast>
+                    </>
+                ) : null)
+            }
 
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <Modal.Header />
@@ -185,6 +208,18 @@ function Alunos() {
                                     value={novoAluno.nome}
                                     onChange={handleInputChange}
                                     required
+                                />
+                            </div>
+                            <div>
+                                <div className="mt-1 block">
+                                    <Label htmlFor="matricula" value="Matricula" />
+                                </div>
+                                <TextInput
+                                    id="matricula"
+                                    name="nomatriculame"
+                                    value={novoAluno.matricula}
+                                    onChange={handleInputChange}
+                                    disabled
                                 />
                             </div>
                             <div>

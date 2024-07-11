@@ -1,4 +1,4 @@
-import { Table, Button, Label, Modal, TextInput, Toast } from "flowbite-react";
+import { Table, Button, Label, Modal, TextInput, Toast, Spinner } from "flowbite-react";
 import Nav from "../../components/navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -16,18 +16,12 @@ interface LivroProps {
 
 export default function CadastroLivro() {
     const [livro, setLivro] = useState<LivroProps[]>([]);
+    const [loading, setLoading] = useState(true)
     const [isblibliotecario, setIsblibliotecario] = useState(false)
     const [openModal, setOpenModal] = useState(false);
     const [add, setAdd] = useState(true);
     const [isDeleted, setIsDeleted] = useState(true)
     const biblio = localStorage.getItem("isBiblio")
-    useEffect(() => {
-        if (biblio == "true") {
-            setIsblibliotecario(true)
-        } else {
-            setIsblibliotecario(false)
-        }
-    });
     const [isUpdated, setIsUpdated] = useState(true)
     const [novoLivro, setNovoLivro] = useState({
         idLivro: 0,
@@ -35,6 +29,13 @@ export default function CadastroLivro() {
         autor: '',
         editora: '',
         ano: ''
+    });
+    useEffect(() => {
+        if (biblio == "true") {
+            setIsblibliotecario(true)
+        } else {
+            setIsblibliotecario(false)
+        }
     });
 
     function onCloseModal() {
@@ -50,12 +51,15 @@ export default function CadastroLivro() {
     }
 
     const fetchLivros = async () => {
+        setLoading(true);
         try {
             const response = await axios.get('http://localhost:8010/biblio/livro');
             setLivro(response.data);
             console.log(response.data)
         } catch (error) {
             console.error('Erro ao buscar Livros:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -116,41 +120,47 @@ export default function CadastroLivro() {
             {isblibliotecario ? (
                 <>
                     <div className="w-11/12 m-auto py-3 ">
-
-                        <div className="w-full justify-end flex ">
-                            <button onClick={() => setOpenModal(true)} className="py-2 px-5  rounded-t-lg text-white font-bold bg-blue-400 hover:bg-blue-600">Adicionar livro</button>
-                        </div>
-                        <Table className="" >
-                            <Table.Head className="bg-cyan-200 text-lg">
-                                <Table.HeadCell>Título</Table.HeadCell>
-                                <Table.HeadCell>Autor</Table.HeadCell>
-                                <Table.HeadCell>Editora</Table.HeadCell>
-                                <Table.HeadCell >Ano</Table.HeadCell>
-                                <Table.HeadCell className="text-center">
-                                    <span className="">Gerenciar</span>
-                                </Table.HeadCell>
-                            </Table.Head>
-                            <Table.Body className="divide-y">
-                                {livro.map((livros) => (
-                                    <Table.Row key={livros.idLivro} className="bg-blue-400 hover:scale-[1.01] hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800 transition-all duration-300">
-                                        <Table.Cell className="whitespace-nowrap font-bold text-white dark:text-white">
-                                            {livros.titulo}
-                                        </Table.Cell>
-                                        <Table.Cell>{livros.autor}</Table.Cell>
-                                        <Table.Cell>{livros.editora}</Table.Cell>
-                                        <Table.Cell>{livros.ano}</Table.Cell>
-                                        <Table.Cell className="flex gap-4 justify-center">
-                                            <button onClick={() => handleUpdate(livros)} className="text-xl text-white font-bold hover:underline dark:text-cyan-500">
-                                                <ImPencil />
-                                            </button>
-                                            <button onClick={() => handleDelete(livros.idLivro)} className="text-2xl text-gray font-bold hover:underline dark:text-cyan-500">
-                                                <IoTrashSharp />
-                                            </button>
-                                        </Table.Cell>
-                                    </Table.Row>
-                                ))}
-                            </Table.Body>
-                        </Table>
+                        {loading ? (
+                            <div className="flex justify-center items-center h-64">
+                                <Spinner size="xl" />
+                            </div>
+                        ) : (
+                            <>
+                                <div className="w-full justify-end flex ">
+                                    <button onClick={() => setOpenModal(true)} className="py-2 px-5  rounded-t-lg text-white font-bold bg-blue-400 hover:bg-blue-600">Adicionar livro</button>
+                                </div>
+                                <Table className="" >
+                                    <Table.Head className="bg-cyan-200 text-lg">
+                                        <Table.HeadCell>Título</Table.HeadCell>
+                                        <Table.HeadCell>Autor</Table.HeadCell>
+                                        <Table.HeadCell>Editora</Table.HeadCell>
+                                        <Table.HeadCell >Ano</Table.HeadCell>
+                                        <Table.HeadCell className="text-center">
+                                            <span className="">Gerenciar</span>
+                                        </Table.HeadCell>
+                                    </Table.Head>
+                                    <Table.Body className="divide-y">
+                                        {livro.map((livros) => (
+                                            <Table.Row key={livros.idLivro} className="bg-blue-400 hover:scale-[1.01] hover:bg-blue-600 text-green-200 dark:border-gray-700 dark:bg-gray-800 transition-all duration-300">
+                                                <Table.Cell className="whitespace-nowrap font-bold text-white dark:text-white">
+                                                    {livros.titulo}
+                                                </Table.Cell>
+                                                <Table.Cell>{livros.autor}</Table.Cell>
+                                                <Table.Cell>{livros.editora}</Table.Cell>
+                                                <Table.Cell>{livros.ano}</Table.Cell>
+                                                <Table.Cell className="flex gap-4 justify-center">
+                                                    <button onClick={() => handleUpdate(livros)} className="text-xl text-white font-bold hover:underline dark:text-cyan-500">
+                                                        <ImPencil />
+                                                    </button>
+                                                    <button onClick={() => handleDelete(livros.idLivro)} className="text-2xl text-gray font-bold hover:underline dark:text-cyan-500">
+                                                        <IoTrashSharp />
+                                                    </button>
+                                                </Table.Cell>
+                                            </Table.Row>
+                                        ))}
+                                    </Table.Body>
+                                </Table>
+                            </>)}
                     </div >
                     {(!isDeleted ? (
                         <>

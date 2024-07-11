@@ -52,7 +52,7 @@ export default function Nav() {
               <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
-              <Navbar.Link href="/gerenciarEmprestimo">Emprestimos</Navbar.Link>
+              <Navbar.Link href="/gerenciarEmprestimo">Gerenciar emprestimos</Navbar.Link>
               <Navbar.Link href="/aluno">Alunos</Navbar.Link>
               <Navbar.Link href="/cadastroLivro">Livros</Navbar.Link>
             </Navbar.Collapse>
@@ -79,7 +79,7 @@ export default function Nav() {
               <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
-              <Navbar.Link href="/gerenciarEmprestimo">Emprestimo</Navbar.Link>
+              <Navbar.Link href="/meusEmprestimos">Meus emprestimos</Navbar.Link>
               <Navbar.Link href="/cadastroLivro">Livros</Navbar.Link>
             </Navbar.Collapse>
 

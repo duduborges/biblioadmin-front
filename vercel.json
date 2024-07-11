@@ -1,5 +1,6 @@
 {
-    "rewrites":  [
-      {"source": "/(.*)", "destination": "/"}
-    ]
-  }
+  "rewrites": [{
+    "source": "/api/(.*)",
+    "destination": "https://189.8.205.53:8010/biblio/$1"
+  }]
+}

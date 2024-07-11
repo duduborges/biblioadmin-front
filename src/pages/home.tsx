@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
-import { Button, Navbar } from "flowbite-react";
-
 import Nav from "../components/navbar";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const [logado, setLogado] = useState(true)
-  const navigate = useNavigate()
+  
+
 
 
 

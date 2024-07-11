@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Table, Button, Label, Modal, TextInput, Toast, Spinner } from "flowbite-react";
 import Nav from "../../components/navbar";
 import { useEffect, useState } from "react";

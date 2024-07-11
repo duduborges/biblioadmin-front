@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import  { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

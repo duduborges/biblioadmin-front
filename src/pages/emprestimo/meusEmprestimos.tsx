@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Nav from "../../components/navbar";
 import axios from "axios";
 import { Table } from "flowbite-react";

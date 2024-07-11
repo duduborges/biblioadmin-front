@@ -54,7 +54,7 @@ export default function CadastroLivro() {
     const fetchLivros = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://189.8.205.53:8010/biblio/livro');
+            const response = await axios.get('https://189.8.205.53:8010/biblio/livro');
             setLivro(response.data);
             console.log(response.data)
         } catch (error) {
@@ -76,9 +76,9 @@ export default function CadastroLivro() {
         event.preventDefault();
         try {
             if (add) {
-                await axios.post('http://189.8.205.53:8010/biblio/livro', novoLivro);
+                await axios.post('https://189.8.205.53:8010/biblio/livro', novoLivro);
             } else {
-                await axios.put("http://189.8.205.53:8010/biblio/livro", novoLivro,);
+                await axios.put("https://189.8.205.53:8010/biblio/livro", novoLivro,);
             }
             fetchLivros();
             onCloseModal();
@@ -90,7 +90,7 @@ export default function CadastroLivro() {
 
     const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`http://189.8.205.53:8010/biblio/livro/id/${id}`);
+            await axios.delete(`https://189.8.205.53:8010/biblio/livro/id/${id}`);
             fetchLivros();
             setIsDeleted(false)
         } catch (error) {

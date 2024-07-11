@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import  { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ function Login() {
   const [senha, setSenha] = useState('');
 
   const handleLogin = async () => {
-    axios.post("http://189.8.205.53:8010/biblio/estudante/login", { matricula: matricula, senha: senha })
+    axios.post("https://189.8.205.53:8010/biblio/estudante/login", { matricula: matricula, senha: senha })
       .then(function (response) {
         const nome = response.data.nome
         localStorage.setItem("nomeuser", nome)

@@ -84,7 +84,7 @@ function GerenciarEmprestimos() {
     const fetchEmprestimos = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://189.8.205.53:8010/biblio/emprestimo');
+            const response = await axios.get('https://189.8.205.53:8010/biblio/emprestimo');
             setEmprestimos(response.data);
             console.log(response.data);
         } catch (error) {
@@ -116,9 +116,9 @@ function GerenciarEmprestimos() {
         event.preventDefault();
         try {
             if (add) {
-                await axios.post('http://189.8.205.53:8010/biblio/emprestimo', novoEmprestimo);
+                await axios.post('https://189.8.205.53:8010/biblio/emprestimo', novoEmprestimo);
             } else {
-                await axios.put("http://189.8.205.53:8010/biblio/emprestimo", novoEmprestimo);
+                await axios.put("https://189.8.205.53:8010/biblio/emprestimo", novoEmprestimo);
             }
             fetchEmprestimos();
             onCloseModal();
@@ -130,7 +130,7 @@ function GerenciarEmprestimos() {
 
     const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`http://189.8.205.53:8010/biblio/emprestimo/id/${id}`);
+            await axios.delete(`https://189.8.205.53:8010/biblio/emprestimo/id/${id}`);
             fetchEmprestimos();
             setIsDeleted(false);
         } catch (error) {

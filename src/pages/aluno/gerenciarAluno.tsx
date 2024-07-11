@@ -38,7 +38,7 @@ function Alunos() {
         senha: ''
     });
 
-   
+
 
     function onCloseModal() {
         setAdd(true);
@@ -67,7 +67,7 @@ function Alunos() {
         event.preventDefault();
         try {
 
-            await axios.put(`http://189.8.205.53:8010/biblio/estudante`, novoAluno,);
+            await axios.put(`https://189.8.205.53:8010/biblio/estudante`, novoAluno,);
 
             fetchAlunos();
             onCloseModal();
@@ -80,7 +80,7 @@ function Alunos() {
 
     const handleDelete = async (id: number) => {
         try {
-            await axios.delete(`http://189.8.205.53:8010/biblio/estudante/${id}`);
+            await axios.delete(`https://189.8.205.53:8010/biblio/estudante/${id}`);
             fetchAlunos();
             setIsDeleted(false)
         } catch (error) {
@@ -90,7 +90,7 @@ function Alunos() {
     }
 
     const handleUpdate = async (estudante: AlunoProps) => {
-        const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante/id/${estudante.idEstudante}`);
+        const response = await axios.get(`https://189.8.205.53:8010/biblio/estudante/id/${estudante.idEstudante}`);
         setOpenModal(true);
         setAdd(false);
         setNovoAluno({
@@ -108,7 +108,7 @@ function Alunos() {
     const fetchAlunos = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://189.8.205.53:8010/biblio/estudante/pag/${pagina}`);
+            const response = await axios.get(`https://189.8.205.53:8010/biblio/estudante/pag/${pagina}`);
             setAluno(response.data);
             console.log(response.data)
         } catch (error) {
@@ -166,9 +166,9 @@ function Alunos() {
                             </Table.Body>
                         </Table>
                     </>)}
-                    <div className="w-full bg-black h-[1px] mt-2"></div>
+                <div className="w-full bg-black h-[1px] mt-2"></div>
                 <div className="flex flex-row items-center gap-3 mt-2 pb-4 justify-center ">
-                    <button className="bg-cyan-300 p-2 rounded-lg text-white font-bold" onClick={() => setPagina(pagina - 1 )}>Pagina anterior</button>
+                    <button className="bg-cyan-300 p-2 rounded-lg text-white font-bold" onClick={() => setPagina(pagina - 1)}>Pagina anterior</button>
                     <p className="text-cyan-200 bg-slate-400 w-8 text-center flex justify-center items-center h-8 rounded-full">{pagina}</p>
                     <button className="bg-cyan-300 p-2 rounded-lg text-white font-bold" onClick={() => setPagina(pagina + 1)}>Proxima pagina</button>
                 </div>

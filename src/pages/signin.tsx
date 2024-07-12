@@ -139,7 +139,7 @@ function Signin() {
           </div>
           <p className='mt-5 flex  justify-center'>
             Já possui uma conta?
-            <a className='ml-2 underline'> Faça login</a>
+            <a className='ml-2 underline' href='/login'>Faça login</a>
           </p>
         </form>
       </div>
